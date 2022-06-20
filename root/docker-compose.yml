@@ -1,0 +1,22 @@
+version: '3'
+services:
+  pykoma:
+    build: 
+      context: ./pykoma
+      dockerfile: Dockerfile
+    restart: always
+    entrypoint: >
+      jupyter-lab
+      --allow-root
+      --ip=0.0.0.0
+      --port=8080
+      --no-browser
+      --NotebookApp.token=''
+      --notebook-dir=/workspace
+    expose:
+      - "8080"
+    ports:
+      - "127.0.0.1:8080:8080"
+    volumes:
+      - ./pykoma/root_jupyter:/root/.jupyter
+      - ./workspace:/workspace
